@@ -3,5 +3,8 @@
     "allow": [
       "mcp__ed91be2c-7ea9-43ef-ac23-8441787dbd0d__read_file_content"
     ]
+  },
+  "env": {
+    "MOTHERDUCK_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphZWhvbmd5b29uODZAZ21haWwuY29tIiwibWRSZWdpb24iOiJhd3MtdXMtZWFzdC0xIiwic2Vzc2lvbiI6ImphZWhvbmd5b29uODYuZ21haWwuY29tIiwicGF0IjoiRjJUMGlKTkhSM1FUYmp6WjMwMEhSNmhNNmp4REd3RTd6TVZlbmxOUFc2YyIsInVzZXJJZCI6ImIxNTM0YjJhLTIxN2ItNGRlOC1iNDhlLWFmNDhiZTIzMTEzNSIsImlzcyI6Im1kX3BhdCIsInJlYWRPbmx5IjpmYWxzZSwidG9rZW5UeXBlIjoicmVhZF93cml0ZSIsImlhdCI6MTc4MDcyNTIxMH0.SSdmOyBkyY13gKd9_ho793snqq9f4Z4V4BW97vzuBLw"
   }
 }
