@@ -1,0 +1,54 @@
+name: ETF June 2026 Rebalancing Analysis
+
+on:
+  workflow_dispatch:        # 수동 실행
+  push:
+    branches:
+      - claude/etf-june-rebalancing-qb151h
+    paths:
+      - 'scripts/etf_rebalancing_analysis.py'
+      - 'data/*.xlsx'
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # 결과 Excel 파일을 repo에 커밋
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: claude/etf-june-rebalancing-qb151h
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install duckdb==1.1.3 pandas openpyxl numpy
+
+      - name: Run rebalancing analysis
+        env:
+          MOTHERDUCK_TOKEN: ${{ secrets.MOTHERDUCK_TOKEN }}
+        run: |
+          python scripts/etf_rebalancing_analysis.py
+
+      - name: Commit & push result
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          mkdir -p output
+          git add output/etf_rebalancing_2026_06.xlsx
+          git diff --staged --quiet || git commit -m "chore: ETF June 2026 rebalancing analysis output"
+          git push origin claude/etf-june-rebalancing-qb151h
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: etf-rebalancing-result
+          path: output/etf_rebalancing_2026_06.xlsx
+          retention-days: 30
